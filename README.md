@@ -1,17 +1,5 @@
 # DonorsChoose-Application-Screening-app
 
-## Workflows
-
-1. Update config.yaml
-2. Update secrets.yaml [Optional]
-3. Update params.yaml
-4. Update the entity
-5. Update the configuration manager in src config
-6. Update the components
-7. Update the pipeline 
-8. Update the main.py
-9. Update the dvc.yaml
-10. app.py
 
 # How to run?
 ### STEPS:
@@ -59,3 +47,23 @@ open up you local host and port
 this setup.py will setup sec-donorchose dir as local package to use 
 6. in src-donorchose __init__ we will add our logger module so we can use logger from local 
 package donorchose --from donorschoose import logger--
+7. utils - common.py  added some common functions - save json , read yaml 
+
+
+
+
+
+
+
+## Workflows
+
+1. Update config.yaml
+2. Update secrets.yaml [Optional]
+3. Update params.yaml
+4. Update the entity
+5. Update the configuration manager in src config
+6. Update the components
+7. Update the pipeline 
+8. Update the main.py
+9. Update the dvc.yaml
+10. app.py
