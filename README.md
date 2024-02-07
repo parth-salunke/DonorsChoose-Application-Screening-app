@@ -49,6 +49,55 @@ this setup.py will setup sec-donorchose dir as local package to use
 package donorchose --from donorschoose import logger--
 7. utils - common.py  added some common functions - save json , read yaml 
 
+8. starting our Project now 
+
+    for each component i will follow this work flow 
+    for 1st component i am following this steps and same will be for others
+
+    a. Data Ingestigate -  
+        download data and store data
+        in src/component we will add new component as data_ingestion 
+        in data ingestion we will create function to download data from Gdrive and 
+        second function to extract data
+    b.
+        to download and store data we need source path from which we will download and 
+        extract path where we will store 
+        in Project we will create artifact folder which use is to store whatever artifact we do in our
+        project .
+
+    c. 
+        config - so we need source path and extarct path to get and extract zip
+        we will create  config/config.yaml - i will add var : path name
+
+        """
+        artifacts is Centralized Storage: 
+        Keeping datasets in a centralized repository ensures easy access and management of data by
+        multiple users or processes.
+
+        generated artifacts will store in artifacts folder
+        """
+
+
+        entity - so in entity we have type of config  used for that particular component in this case it is data ingestion 
+        so we  have config data for data ingestion from config , we need to use that accross whole project so we will create entity class which will only store that config in class object so we can use it accross project using that object
+        var we are storing in config/config.yaml in entuity/config_entity
+
+    d.
+        we have 2 config.yaml and config_entity  now so we will use 
+        src/constant __init__.py where i will store path for both
+        because we will never going to change constant values 
+    
+    e.
+        finally in src/configuration.py 
+        we will manage config for 
+            crate dir 
+            create object for that particular config  
+    f. 
+        now all this run in  stage_01_data_ingestion 
+        we need to call all function here 
+
+
+
 
 
 
