@@ -47,3 +47,12 @@ Now,
 open up you local host and port
 ```
 
+
+
+## Project Steps
+
+Templates.py --  it will create folder structure for our project
+create conda env and create requirements.txt
+run -  conda create -n dcenv310 python=3.8 -y
+run -  pip install requirements.txt
+create setup.py - we will add project details here - version , repoName , authorName 
