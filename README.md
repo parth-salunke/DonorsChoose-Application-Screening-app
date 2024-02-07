@@ -51,8 +51,11 @@ open up you local host and port
 
 ## Project Steps
 
-Templates.py --  it will create folder structure for our project
-create conda env and create requirements.txt
-run -  conda create -n dcenv310 python=3.8 -y
-run -  pip install requirements.txt
-create setup.py - we will add project details here - version , repoName , authorName 
+1. Templates.py --  it will create folder structure for our project
+2. create conda env and create requirements.txt
+3. run -  conda create -n dcenv310 python=3.8 -y
+4. run -  pip install requirements.txt  aldo add -e.(to use local package in next step)
+5. create setup.py - we will add project details here - version , repoName , authorName 
+this setup.py will setup sec-donorchose dir as local package to use 
+6. in src-donorchose __init__ we will add our logger module so we can use logger from local 
+package donorchose --from donorschoose import logger--
