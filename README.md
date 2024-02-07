@@ -2,11 +2,12 @@
 
 Project Jupyter Notebook : 
 1. [Exploratory_data_analysis Notebook] (research/01_Exploratory_data_analysis.ipynb)
+   
 •	Performed exploratory data analysis (EDA) to understand the characteristics and patterns in the dataset.
 •	Analyzed data distributions, correlations, and outliers to gain insights into the underlying structure.
 •	Used visualizations and statistical summaries to uncover trends and relationships within the data.
 
-2. [Preprocessing data Notebook](research/02_Preprocessing_data.ipynb)
+3. [Preprocessing data Notebook](research/02_Preprocessing_data.ipynb)
 
 •	Incorporated preprocessing techniques tailored for text data, including tokenization, stop word removal, and stemming or lemmatization.
 •	Performed text-specific tasks such as vectorization (e.g., TF-IDF or word embeddings) to convert text data into numerical format for model training.
