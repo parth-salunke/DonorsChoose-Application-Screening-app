@@ -1,7 +1,7 @@
 # DonorsChoose-Application-Screening-app
 
 Project Jupyter Notebook : 
-1. [Exploratory_data_analysis Notebook] (research/01_Exploratory_data_analysis.ipynb)
+1. [Exploratory_data_analysis Notebook](research/01_Exploratory_data_analysis.ipynb)
    
 •	Performed exploratory data analysis (EDA) to understand the characteristics and patterns in the dataset.
 •	Analyzed data distributions, correlations, and outliers to gain insights into the underlying structure.
