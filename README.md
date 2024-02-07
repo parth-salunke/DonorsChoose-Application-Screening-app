@@ -1,6 +1,12 @@
 # DonorsChoose-Application-Screening-app
 
 
+
+[Exploratory_data_analysis](E:\parth\DonorsChoose-Application-Screening-app\research\01_Exploratory_data_analysis.ipynb)
+
+
+Currently i am Working on ML dataPipeline 
+
 # How to run?
 ### STEPS:
 
