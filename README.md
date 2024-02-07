@@ -34,7 +34,7 @@ Project Jupyter Notebook :
 •	Trained and optimized the LSTM model to capture temporal dependencies in sequential data, improving predictive accuracy.
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-##Currently i am Working on MLops Pipeline for Project....
+## Currently i am Working on MLops Pipeline for Project....
 
 ### How to run?
 ### STEPS:
