@@ -1,11 +1,12 @@
 # DonorsChoose-Application-Screening-app
 
+Project Jupyter Notebook : 
+[Exploratory_data_analysis Notebook](research/01_Exploratory_data_analysis.ipynb)
+[Preprocessing data Notebook](research/02_Preprocessing_data.ipynb)
+[Data modeling ML Notebook](research/03_Data_modeling_ML.ipynb)
+[Data modeling LSTM Notebook](research/04_Data_modeling_LSTM.ipynb)
 
-
-[Exploratory_data_analysis](research/01_Exploratory_data_analysis.ipynb)
-
-
-Currently i am Working on ML dataPipeline 
+Currently i am Working on MLops Pipeline for Project....
 
 # How to run?
 ### STEPS:
@@ -43,82 +44,59 @@ open up you local host and port
 
 
 
-## Project Steps
+### Project Flow
 
-1. Templates.py --  it will create folder structure for our project
-2. create conda env and create requirements.txt
-3. run -  conda create -n dcenv310 python=3.8 -y
-4. run -  pip install requirements.txt  aldo add -e.(to use local package in next step)
-5. create setup.py - we will add project details here - version , repoName , authorName 
-this setup.py will setup sec-donorchose dir as local package to use 
-6. in src-donorchose __init__ we will add our logger module so we can use logger from local 
-package donorchose --from donorschoose import logger--
-7. utils - common.py  added some common functions - save json , read yaml 
+## Step 1: Creating the Folder Structure
+- Use `Templates.py` to kickstart the project by setting up the initial folder structure.
 
-8. starting our Project now 
+## Step 2: Setting up Conda Environment and Dependencies
+- Create a Conda environment named `dcenv310` with Python 3.8 to manage dependencies effectively.
+- Generate a `requirements.txt` file to track and install project dependencies.
 
-    for each component i will follow this work flow 
-    for 1st component i am following this steps and same will be for others
+## Step 3: Initializing the Conda Environment
+- Run `conda create -n dcenv310 python=3.8 -y` to set up the Conda environment.
 
-    a. Data Ingestigate -  
-        download data and store data
-        in src/component we will add new component as data_ingestion 
-        in data ingestion we will create function to download data from Gdrive and 
-        second function to extract data
-    b.
-        to download and store data we need source path from which we will download and 
-        extract path where we will store 
-        in Project we will create artifact folder which use is to store whatever artifact we do in our
-        project .
+## Step 4: Installing Project Dependencies
+- Install necessary dependencies listed in `requirements.txt` using pip.
+- Include any local packages using the `-e` flag if required.
 
-    c. 
-        config - so we need source path and extarct path to get and extract zip
-        we will create  config/config.yaml - i will add var : path name
+## Step 5: Configuring Project Details
+- Define project specifics such as version, repository name, and author within `setup.py`.
+- Ensure `setup.py` configures the `src-donorchose` directory as a local package.
 
-        """
-        artifacts is Centralized Storage: 
-        Keeping datasets in a centralized repository ensures easy access and management of data by
-        multiple users or processes.
+## Step 6: Setting Up Logging
+- Configure logging functionality within `src-donorchose/__init__.py` for effective debugging.
+- Example: `from donorschoose import logger`.
 
-        generated artifacts will store in artifacts folder
-        """
+## Step 7: Implementing Utility Functions
+- Create common utility functions like saving JSON and reading YAML within `utils/common.py`.
 
+## Step 8: Starting the Project
+- Begin the project by following a systematic workflow for each component.
 
-        entity - so in entity we have type of config  used for that particular component in this case it is data ingestion 
-        so we  have config data for data ingestion from config , we need to use that accross whole project so we will create entity class which will only store that config in class object so we can use it accross project using that object
-        var we are storing in config/config.yaml in entuity/config_entity
+---
 
-    d.
-        we have 2 config.yaml and config_entity  now so we will use 
-        src/constant __init__.py where i will store path for both
-        because we will never going to change constant values 
-    
-    e.
-        finally in src/configuration.py 
-        we will manage config for 
-            crate dir 
-            create object for that particular config  
-    f. 
-        now all this run in  stage_01_data_ingestion 
-        we need to call all function here 
+## Workflow for Each Component
 
+# Data Ingestion
+- Download and store necessary data for the project.
+- Establish a `data_ingestion` component in `src/component` and implement data retrieval functions.
 
+# Artifact Management
+- Set up an `artifacts` folder at the project root to manage generated artifacts efficiently.
 
+# Configuration Setup
+- Define source and extract paths within `config/config.yaml`.
+- Utilize a `config_entity` class to store and manage configuration data effectively.
 
+# Constants Declaration
+- Store constant values such as file paths within `src/constant/__init__.py`.
 
+# Configuration Management
+- Develop `src/configuration.py` to handle configuration-related tasks like directory creation and object instantiation.
 
+# Execution
+- Execute defined functions for each component, starting with `stage_01_data_ingestion`.
 
+---
 
-
-## Workflows
-
-1. Update config.yaml
-2. Update secrets.yaml [Optional]
-3. Update params.yaml
-4. Update the entity
-5. Update the configuration manager in src config
-6. Update the components
-7. Update the pipeline 
-8. Update the main.py
-9. Update the dvc.yaml
-10. app.py
