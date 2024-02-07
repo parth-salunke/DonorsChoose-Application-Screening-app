@@ -2,7 +2,7 @@
 
 
 
-[Exploratory_data_analysis](research\01_Exploratory_data_analysis.ipynb)
+[Exploratory_data_analysis](research/01_Exploratory_data_analysis.ipynb)
 
 
 Currently i am Working on ML dataPipeline 
