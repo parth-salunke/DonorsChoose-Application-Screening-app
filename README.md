@@ -1,33 +1,42 @@
 # DonorsChoose-Application-Screening-app
 
 Project Jupyter Notebook : 
-1. [Exploratory_data_analysis Notebook] (research/01_Exploratory_data_analysis.ipynb)
+1. [Exploratory_data_analysis Notebook](research/01_Exploratory_data_analysis.ipynb)
+   
 •	Performed exploratory data analysis (EDA) to understand the characteristics and patterns in the dataset.
+
 •	Analyzed data distributions, correlations, and outliers to gain insights into the underlying structure.
+
 •	Used visualizations and statistical summaries to uncover trends and relationships within the data.
 
-2. [Preprocessing data Notebook](research/02_Preprocessing_data.ipynb)
+3. [Preprocessing data Notebook](research/02_Preprocessing_data.ipynb)
 
 •	Incorporated preprocessing techniques tailored for text data, including tokenization, stop word removal, and stemming or lemmatization.
+
 •	Performed text-specific tasks such as vectorization (e.g., TF-IDF or word embeddings) to convert text data into numerical format for model training.
+
 •	Implemented text cleaning steps to remove noise, such as special characters and punctuation, and standardized text formatting for consistency.
 
 3. [Data modeling ML Notebook](research/03_Data_modeling_ML.ipynb)
 
 •	Applied machine learning algorithms including Logistic Regression, Support Vector Machines (SVM), Random Forest, and Decision Trees for modeling.
+
 •	Tuned hyperparameters and evaluated model performance using metrics such as accuracy, precision, recall, and F1-score.
+
 •	Selected the best-performing model based on validation results to deploy for predictive tasks.
 
 4. [Data modeling LSTM Notebook](research/04_Data_modeling_LSTM.ipynb)
 
 •	Implemented a Long Short-Term Memory (LSTM) neural network for deep learning modeling.
+
 •	Incorporated TF-IDF data within the interquartile range (25th to 75th percentile) for enhanced feature representation.
+
 •	Trained and optimized the LSTM model to capture temporal dependencies in sequential data, improving predictive accuracy.
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+## Currently i am Working on MLops Pipeline for Project....
 
-Currently i am Working on MLops Pipeline for Project....
-
-# How to run?
+### How to run?
 ### STEPS:
 
 Clone the repository
