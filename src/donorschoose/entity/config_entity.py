@@ -17,3 +17,9 @@ class DataIngestionConfig:
     source_URL: str
     local_data_file: Path
     unzip_dir: Path
+    
+@dataclass(frozen=True)
+class DataCleanConfig:
+    root_dir: Path
+    local_data_trainfile: Path
+    local_data_resourcefile: Path

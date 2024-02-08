@@ -5,3 +5,8 @@ data_ingestion:
   source_URL: https://drive.google.com/file/d/1-4mgFvbEEvCuIar7eas29F5k8hfbRFn3/view?usp=sharing
   local_data_file: artifacts/data_ingestion/dataset.zip
   unzip_dir: artifacts/data_ingestion
+
+data_cleaning:
+  root_dir: artifacts/data_cleaning
+  local_data_trainfile: artifacts/data_ingestion/dataset/train1000.csv
+  local_data_resourcefile: artifacts/data_ingestion/dataset/resource1000.csv

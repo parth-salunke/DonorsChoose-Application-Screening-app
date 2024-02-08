@@ -8,7 +8,8 @@ from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
 from typing import Any
-import base64
+import pandas as pd
+
 
 """
 ConfigBox - its uses dict as config param
@@ -49,7 +50,28 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         raise ValueError("yaml file is empty")
     except Exception as e:
         raise e
-    
+
+@ensure_annotations
+def read_csv(path_to_csv: Path) -> pd.core.frame.DataFrame:
+    """reads csv file and returns 
+
+    Args:
+        path_to_csv (str): path like input
+
+    Raises:
+        e: empty file
+
+    Returns:
+        pd.core.frame.DataFrame
+    """
+    try:
+        with open(path_to_csv) as csv_file:
+            dataframe = pd.read_csv(csv_file)
+            logger.info(f"csv file: {path_to_csv}, df Shape:{dataframe.shape} loaded successfully")
+            return dataframe
+    except Exception as e:
+        raise e
+      
 @ensure_annotations
 def create_directories(path_to_directories: list, verbose=True):
     """create list of directories

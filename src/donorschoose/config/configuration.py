@@ -2,7 +2,7 @@ from donorschoose.constants import *
 import os
 from donorschoose.utils.common import read_yaml, create_directories
 from donorschoose.entity.config_entity import (DataIngestionConfig)
-
+from donorschoose.entity.config_entity import (DataCleanConfig)
 
 class ConfigurationManager:
     def __init__(
@@ -34,4 +34,16 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+
+    def get_data_clean_config(self) -> DataCleanConfig:
+        config = self.config.data_cleaning
+        
+        create_directories([config.root_dir])
+
+        data_clean_config = DataCleanConfig(
+            root_dir=config.root_dir,
+            local_data_trainfile=config.local_data_trainfile,
+            local_data_resourcefile=config.local_data_resourcefile
+        )
+        return data_clean_config
     
