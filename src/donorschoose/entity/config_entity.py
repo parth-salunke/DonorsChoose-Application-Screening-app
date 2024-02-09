@@ -23,3 +23,5 @@ class DataCleanConfig:
     root_dir: Path
     local_data_trainfile: Path
     local_data_resourcefile: Path
+    local_data_stopwordsfile: Path
+    save_clean_datafile: Path

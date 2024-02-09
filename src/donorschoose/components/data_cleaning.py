@@ -1,73 +1,76 @@
 import os
 from donorschoose import logger
 import re
+from pathlib import Path
 import pandas as pd
+import numpy as np
 from tqdm import tqdm
 from donorschoose.entity.config_entity import DataCleanConfig
-from donorschoose.utils.common import read_csv
+from donorschoose.config.configuration import ConfigurationManager
+from donorschoose.utils.common import read_csv, read_txt_file
+from sklearn.preprocessing import StandardScaler
+
+
 class DataCleaning:
     def __init__(self, config: DataCleanConfig):
         self.config = config
-        self.stopwords= ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've",\
-            "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', \
-            'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their',\
-            'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', \
-            'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', \
-            'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', \
-            'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after',\
-            'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further',\
-            'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more',\
-            'most', 'other', 'some', 'such', 'only', 'own', 'same', 'so', 'than', 'too', 'very', \
-            's', 't', 'can', 'will', 'just', 'don', "don't", 'should', "should've", 'now', 'd', 'll', 'm', 'o', 're', \
-            've', 'y', 'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't", 'doesn', "doesn't", 'hadn',\
-            "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 'ma', 'mightn', "mightn't", 'mustn',\
-            "mustn't", 'needn', "needn't", 'shan', "shan't", 'shouldn', "shouldn't", 'wasn', "wasn't", 'weren', "weren't", \
-            'won', "won't", 'wouldn', "wouldn't"]
+        self.train_df = None
+        self.resource_df = None
+        self.stopwords= None
 
-    def read_files(self) -> pd.core.frame.DataFrame:
+    def read_files(self):
         '''
         Fetches data from the specified URLs and returns DataFrames.
         '''
         try: 
             root_dir = self.config.root_dir
             os.makedirs(root_dir, exist_ok=True)
-
-            train_path = self.config.local_data_trainfile
-            resource_path = self.config.local_data_resourcefile
-            train_df = read_csv(train_path)
-            resource_df = read_csv(resource_path)
-
+            train_path = Path(self.config.local_data_trainfile)
+            
+            resource_path = Path(self.config.local_data_resourcefile)
+            stopword_txt_path = Path(self.config.local_data_stopwordsfile)
+            self.train_df = read_csv(train_path)
+            self.resource_df = read_csv(resource_path)
+            self.stopwords = read_txt_file(stopword_txt_path)
+            
         except Exception as e:
             raise e
-
-        return train_df, resource_df
     
-    def clean_text_column(df_column :pd.core.frame.DataFrame , columnName : str  )-> pd.core.frame.DataFrame :
+    def clean_text_column(self, column:str ):
         """
         this function will remove Spaces and special char from text column
         
         if we have any Nan value then it will fill nan value with 
         whatever have max count category
         """
-        df_column =df_column.str.replace(' ','_')
-        df_column =df_column.str.replace(',','_')
-        df_column =df_column.str.replace('.','')
-        df_column =df_column.str.replace('-','_')
-        df_column =df_column.str.replace('&','_')
-        df_column =df_column.str.replace(' The ','')
-        df_column =df_column.str.lower()
-        df_column =df_column.str.replace('___','_')
-        df_column =df_column.str.replace('__','_')
-        
-        max_count_id = df_column.value_counts().idxmax()
-        df_column=df_column.fillna(max_count_id)
-        
-        logger.info(f"preprocessed column :{columnName} , unique categories Count : {len(df_column.value_counts())}")
 
-        return df_column
+        self.train_df[column] =self.train_df[column].str.replace(' ','_')
+        self.train_df[column] =self.train_df[column].str.replace(',','_')
+        self.train_df[column] =self.train_df[column].str.replace('.','')
+        self.train_df[column] =self.train_df[column].str.replace('-','_')
+        self.train_df[column] =self.train_df[column].str.replace('&','_')
+        self.train_df[column] =self.train_df[column].str.replace(' The ','')
+        self.train_df[column] =self.train_df[column].str.lower()
+        self.train_df[column] =self.train_df[column].str.replace('___','_')
+        self.train_df[column] =self.train_df[column].str.replace('__','_')
+        
+        max_count_id = self.train_df[column].value_counts().idxmax()
+        self.train_df[column]=self.train_df[column].fillna(max_count_id)
+        
+        logger.info(f"preprocessed column :{column} , unique categories Count : {len(self.train_df[column].value_counts())}")
 
+    def add_two_column(self , column1: str , column2: str):
+        try:
+            if column1 not in self.train_df.columns:
+                self.train_df[column1] = self.train_df[column2].astype(str)
+            else:
+                self.train_df[column1] += self.train_df[column2].astype(str)
+
+        except Exception as e:
+            raise e
+        
     def decontracted(self ,phrase: str) -> str:
-        # specific
+            # specific
         phrase = re.sub(r"won't", "will not", phrase)
         phrase = re.sub(r"can\'t", "can not", phrase)
 
@@ -83,15 +86,53 @@ class DataCleaning:
         
         return phrase
 
-    def preprocess_text(self ,text_data: list)-> list:
+    def preprocess_text(self ,column:str)-> list:
+        text_list = self.train_df[column].values
         preprocessed_text = []
-        for sentance in tqdm(text_data):
-            sent = self.decontracted(sentance)
-            sent = sent.replace('\\r', ' ')
-            sent = sent.replace('\\n', ' ')
-            sent = sent.replace('\\"', ' ')
-            sent = re.sub('[^A-Za-z0-9]+', ' ', sent)
-            sent = ' '.join(e for e in sent.split() if e.lower() not in self.stopwords)
-            preprocessed_text.append(sent.lower().strip())
-        return preprocessed_text
+        try:
+            for sentance in tqdm(text_list):
+                sent = self.decontracted(sentance)
+                sent = sent.replace('\\r', ' ')
+                sent = sent.replace('\\n', ' ')
+                sent = sent.replace('\\"', ' ')
+                sent = re.sub('[^A-Za-z0-9]+', ' ', sent)
+                sent = ' '.join(e for e in sent.split() if e.lower() not in self.stopwords)
+                preprocessed_text.append(sent.lower().strip())
+            logger.info(f"preprocessed column :{column}")
+            self.train_df[column]=preprocessed_text
+        
+        except Exception as e:
+            raise e
+
+    def merge_csv(self):
+        """
+        joining two dataframes in python
+        """
+        try:
+            self.resource_df = self.resource_df.groupby('id').agg({'price':'sum', 'quantity':'sum'}).reset_index()
+            self.train_df =pd.merge(self.train_df, self.resource_df, on='id', how='left')
+            logger.info(f"aggrigated resourde df and merged both df")
+        except Exception as e:
+            raise e
+    
+    def normalize_column(self ,column: str):
+        try:
+            scaler = StandardScaler()
+            scaler.fit(self.train_df[column].values.reshape(-1, 1))
+            self.train_df[column]=scaler.transform(self.train_df[column].values.reshape(-1, 1) )
+            logger.info(f"normalized column : {column}")
+        except Exception as e:
+            raise e
+        
+    def drop_colums(self , column_list : list):
+        self.train_df = self.train_df.drop(column_list, axis=1)
+        logger.info(f"dropped columns:{column_list}")
+        
+    def rename_column(self ,columnNanme:str , newName : str):
+        self.train_df = self.train_df.rename(columns={
+            columnNanme: newName,
+            })
+        logger.info(f"renamed column:{columnNanme} to {newName}")
+        
+    
     

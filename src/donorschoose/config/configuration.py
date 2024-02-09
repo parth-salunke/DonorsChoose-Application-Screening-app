@@ -37,13 +37,14 @@ class ConfigurationManager:
 
     def get_data_clean_config(self) -> DataCleanConfig:
         config = self.config.data_cleaning
-        
         create_directories([config.root_dir])
 
         data_clean_config = DataCleanConfig(
             root_dir=config.root_dir,
             local_data_trainfile=config.local_data_trainfile,
-            local_data_resourcefile=config.local_data_resourcefile
+            local_data_resourcefile=config.local_data_resourcefile,
+            local_data_stopwordsfile =config.local_data_stopwordsfile,
+            save_clean_datafile = config.save_clean_datafile
         )
         return data_clean_config
     
