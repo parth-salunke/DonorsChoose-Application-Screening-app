@@ -3,6 +3,7 @@ import os
 from donorschoose.utils.common import read_yaml, create_directories
 from donorschoose.entity.config_entity import (DataIngestionConfig)
 from donorschoose.entity.config_entity import (DataCleanConfig)
+from donorschoose.entity.config_entity import (DataTransformationConfig)
 
 class ConfigurationManager:
     def __init__(
@@ -45,6 +46,17 @@ class ConfigurationManager:
             local_data_resourcefile=config.local_data_resourcefile,
             local_data_stopwordsfile =config.local_data_stopwordsfile,
             save_clean_datafile = config.save_clean_datafile
+        )
+        return data_clean_config
+
+    def get_data_transform_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+        create_directories([config.root_dir])
+
+        data_clean_config = DataTransformationConfig(
+            root_dir=config.root_dir,
+            local_data_cleanfile =  config.local_data_cleanfile,
+            save_transformed_datafile = config.save_transformed_datafile,
         )
         return data_clean_config
     

@@ -114,16 +114,7 @@ class DataCleaning:
             logger.info(f"aggrigated resourde df and merged both df")
         except Exception as e:
             raise e
-    
-    def normalize_column(self ,column: str):
-        try:
-            scaler = StandardScaler()
-            scaler.fit(self.train_df[column].values.reshape(-1, 1))
-            self.train_df[column]=scaler.transform(self.train_df[column].values.reshape(-1, 1) )
-            logger.info(f"normalized column : {column}")
-        except Exception as e:
-            raise e
-        
+
     def drop_colums(self , column_list : list):
         self.train_df = self.train_df.drop(column_list, axis=1)
         logger.info(f"dropped columns:{column_list}")

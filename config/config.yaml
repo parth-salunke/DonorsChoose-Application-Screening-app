@@ -12,3 +12,8 @@ data_cleaning:
   local_data_resourcefile: artifacts/data_ingestion/dataset/filtered_resource_data1000.csv
   local_data_stopwordsfile: artifacts/data_ingestion/dataset/stopwords-en.txt
   save_clean_datafile: artifacts/data_cleaning/clean_data.csv
+
+data_transformation:
+  root_dir: artifacts/data_transform
+  local_data_cleanfile: artifacts/data_cleaning/clean_data.csv
+  save_transformed_datafile: artifacts/data_transform

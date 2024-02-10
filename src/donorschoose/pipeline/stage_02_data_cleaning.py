@@ -30,8 +30,6 @@ class DataCleaningTrainingPipeline:
         data_clean.add_two_column("essay" , "project_essay_3")
         data_clean.add_two_column("essay" , "project_essay_4")
         data_clean.preprocess_text("essay")
-        data_clean.normalize_column("price")
-        data_clean.normalize_column("quantity")
         data_clean.rename_column("project_subject_categories" ,"clean_categories")
         data_clean.rename_column("project_subject_subcategories" ,"clean_subcategories")
         drop_columns_list = ["project_essay_1",

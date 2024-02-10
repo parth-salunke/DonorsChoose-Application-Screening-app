@@ -25,3 +25,9 @@ class DataCleanConfig:
     local_data_resourcefile: Path
     local_data_stopwordsfile: Path
     save_clean_datafile: Path
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path
+    local_data_cleanfile: Path
+    save_transformed_datafile: Path
