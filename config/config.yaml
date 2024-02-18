@@ -17,3 +17,7 @@ data_transformation:
   root_dir: artifacts/data_transform
   local_data_cleanfile: artifacts/data_cleaning/clean_data.csv
   save_transformed_datafile: artifacts/data_transform
+
+model_training:
+  root_dir: artifacts/model_training
+  local_train_file: artifacts/data_transform/train.npz

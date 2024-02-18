@@ -4,16 +4,17 @@ from donorschoose.utils.common import read_yaml, create_directories
 from donorschoose.entity.config_entity import (DataIngestionConfig)
 from donorschoose.entity.config_entity import (DataCleanConfig)
 from donorschoose.entity.config_entity import (DataTransformationConfig)
+from donorschoose.entity.config_entity import (ModelTrainingConfig)
 
 class ConfigurationManager:
     def __init__(
         self,
         config_filepath = CONFIG_FILE_PATH,
-        # params_filepath = PARAMS_FILE_PATH
+        params_filepath = PARAMS_FILE_PATH
         ):
 
         self.config = read_yaml(config_filepath)
-        # self.params = read_yaml(params_filepath)
+        self.params = read_yaml(params_filepath)
 
         create_directories([self.config.artifacts_root])
 
@@ -59,4 +60,19 @@ class ConfigurationManager:
             save_transformed_datafile = config.save_transformed_datafile,
         )
         return data_clean_config
+
+    def get_model_training_config(self) -> ModelTrainingConfig:
+        config = self.config.model_training
+        params = self.params
+        create_directories([config.root_dir])
+        model_training_config = ModelTrainingConfig(
+            root_dir=config.root_dir,
+            local_train_file = config.local_train_file,
+            penalty=params.PENALTY,
+            C=self.params.C,
+            max_iter=params.MAX_ITER,
+            solver=params.SOLVER,
+
+        )
+        return model_training_config
     

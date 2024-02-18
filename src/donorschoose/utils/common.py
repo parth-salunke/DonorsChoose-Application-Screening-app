@@ -30,27 +30,30 @@ we use ensure annottation to ensure that we are passing correct datatype
 
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
-    """reads yaml file and returns
+    """Reads yaml file and returns ConfigBox.
 
     Args:
-        path_to_yaml (str): path like input
+        path_to_yaml (Path): Path to the YAML file.
 
     Raises:
-        ValueError: if yaml file is empty
-        e: empty file
+        ValueError: If the YAML file is empty or cannot be loaded.
+        FileNotFoundError: If the file does not exist.
 
     Returns:
-        ConfigBox: ConfigBox type
+        ConfigBox: ConfigBox containing the YAML content.
     """
     try:
         with open(path_to_yaml) as yaml_file:
             content = yaml.safe_load(yaml_file)
-            logger.info(f"yaml file: {path_to_yaml} loaded successfully")
+            if content is None:
+                raise ValueError("YAML file is empty")
+            logger.info(f"YAML file '{path_to_yaml}' loaded successfully")
             return ConfigBox(content)
-    except BoxValueError:
-        raise ValueError("yaml file is empty")
+    except FileNotFoundError:
+        raise FileNotFoundError(f"YAML file '{path_to_yaml}' not found")
     except Exception as e:
-        raise e
+        raise ValueError(f"Error loading YAML file '{path_to_yaml}': {e}")
+
 
 @ensure_annotations
 def read_csv(path_to_csv: Path) -> pd.core.frame.DataFrame:

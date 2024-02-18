@@ -31,3 +31,12 @@ class DataTransformationConfig:
     root_dir: Path
     local_data_cleanfile: Path
     save_transformed_datafile: Path
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    root_dir: Path
+    local_train_file: Path
+    penalty:str
+    C:float
+    max_iter:int
+    solver:str

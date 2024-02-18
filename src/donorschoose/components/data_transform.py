@@ -113,14 +113,19 @@ class DataTransformation:
             raise e
 
     def save_transformed_data(self):
-
+        
+        scaler = StandardScaler(with_mean=False)
+        self.X_train_transformed = scaler.fit_transform(self.X_train_transformed)
+        self.X_val_transformed = scaler.transform(self.X_val_transformed)
+        self.X_test_transformed = scaler.transform(self.X_test_transformed)
+        
         self.X_train_transformed = hstack([self.X_train_transformed ,self.y_train.values.reshape(-1, 1)])
         self.X_val_transformed = hstack([self.X_val_transformed ,self.y_val.values.reshape(-1, 1)])
         self.X_test_transformed = hstack([self.X_test_transformed , self.y_test.values.reshape(-1, 1)])
+        
         local_dir_path = self.config.root_dir
         save_npz(Path(local_dir_path+"/train.npz"), self.X_train_transformed)
         save_npz(Path(local_dir_path+"/val.npz"), self.X_val_transformed)
         save_npz(Path(local_dir_path+"/test.npz"), self.X_test_transformed)
-
 
             

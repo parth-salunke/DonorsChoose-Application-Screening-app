@@ -1,1 +1,4 @@
-key:value
+PENALTY: 'l2'
+C: 0.1
+MAX_ITER: 2000
+SOLVER: 'sag'
